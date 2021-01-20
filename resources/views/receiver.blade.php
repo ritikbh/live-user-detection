@@ -1,4 +1,3 @@
-<html>
 <style>
 
 video{
@@ -206,4 +205,3 @@ function enableCam(event) {
 
 </script>
 
-</html>

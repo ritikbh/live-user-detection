@@ -1,4 +1,3 @@
-<html>
 
 
 <style>
@@ -58,5 +57,3 @@ var video = document.querySelector('video');
 </script>
 
 
-
-</html>

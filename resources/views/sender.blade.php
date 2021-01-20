@@ -11,7 +11,7 @@ video{
 
 
 <div style="margin-top: 20px;margin-bottom: 20px;margin-right: 12px;">
-<button id="btn-start-video">Start Video</button>
+<button id="btn-start-video">Start Live Video</button>
 
 </div>
 
@@ -25,7 +25,7 @@ video{
 var connection = new RTCMultiConnection();
 
 connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
-connection.socketMessageEvent = 'real-time-detection';
+connection.socketMessageEvent = "real-time-detection-{{session('unique-id')}}";
 
 connection.enableFileSharing = false;
 connection.session = {

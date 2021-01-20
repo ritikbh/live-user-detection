@@ -5,12 +5,46 @@ video{
     width:400px !important;
   }
 
+html,body{
+width: 100%;
+height: 100%;
+}
+#circle {
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+width: 150px;
+height: 150px;	
+}
+.loader {
+width: calc(100% - 0px);
+height: calc(100% - 0px);
+border: 8px solid #ffff;
+border-top: 8px solid #09f;
+border-radius: 50%;
+animation: rotate 5s linear infinite;
+}
+@keyframes rotate {
+100% {transform: rotate(360deg);}
+} 
 </style>
 
-<div id="videoInput">
+<div class="col" style="display:block" id="animate-loader">
+<div id="circle">
+<div class="loader">
+<div class="loader">
+<div class="loader">
+</div>
+</div>
+</div>
+</div> 
 </div>
 
-
+<div class="col d-flex justify-content-center" style="display:none" id="user-status">
+<h1>User Status</h1><br>
+<span id="user-change-status"></span>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
 
@@ -24,14 +58,14 @@ var joinClassInterval;
 var connection = new RTCMultiConnection();
 
 connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
-connection.socketMessageEvent = 'real-time-detection';
+connection.socketMessageEvent = "real-time-detection-{{session('unique-id')}}";
 
 connection.enableFileSharing = false;
 connection.session = {
-    audio: false,
-    video: false,
+    audio: true,
+    video: true,
     data: true,
-    oneway: false
+    oneway: true
 };
 connection.sdpConstraints.mandatory = {
     OfferToReceiveAudio: false,
@@ -41,7 +75,16 @@ connection.dontCaptureUserMedia = true;
 connection.onopen = function(event) {
     clearInterval(checkConnection);
     detectPerson();
- 
+    setTimeout(function(){ 
+
+      $('#animate-loader').css('display','none');
+ $('#user-status').css('display','block');
+
+     }, 10000);
+
+
+
+
     };
 
     checkConnection = setInterval(() => { 
@@ -49,7 +92,6 @@ connection.onopen = function(event) {
 
     }, 2000);
 
-	var video = document.getElementById("videoInput");
 
 
 </script>
@@ -97,22 +139,19 @@ var children = [];
 function predictWebcam() {
 
 model.estimateFaces(video).then(function (predictions) {
-    
-    if(predictions.length == 1)
+  if(predictions.length == 1)
   {
-console.log('User Exist')
+    $('#user-change-status').html('<img src="/images/right.jpg"width="50" height="50"><h3>User Exists</h3>')
   }
+
    if(predictions.length == 0)
   {
-console.log('No user')
+    $('#user-change-status').html('<img src="/images/wrong.png"width="50" height="50"><h3>No User</h3>')
   }
   if(predictions.length > 1)
 {
 
-    console.log("Multiple Persons Detected");
-
-
-
+  $('#user-change-status').html('<h3>Multiple Users</h3>')
 
 }
 

@@ -16,8 +16,7 @@ class GenerateIDController extends Controller
 
 
         return view('sender');
-    print_r(session('unique-id'));
-        exit();
+ 
 
     } 
 

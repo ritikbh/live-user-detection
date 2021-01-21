@@ -6,6 +6,7 @@ Its a live user detection module which uses WebRTC and tensorflow libraries to d
 ## Installation - 
 1. Clone the Project
 2. Run composer install
+3. Run php artisan serve
 
 ## Usage - 
 1. Laravel framework is only used to generate a unique Room ID and to store it in session. 

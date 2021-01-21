@@ -14,3 +14,5 @@ Its a live user detection module which uses WebRTC and tensorflow libraries to d
  ii) receiver.js
  
 3. You can deploy your own RTC multiconnection node server from this link - https://www.npmjs.com/package/rtcmulticonnection
+
+4. Tensorflow library is used to detect users in a live video stream

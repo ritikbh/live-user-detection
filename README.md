@@ -9,3 +9,8 @@ Its a live user detection module which uses WebRTC and tensorflow libraries to d
 
 ## Usage - 
 1. Laravel framework is only used to generate a unique Room ID and to store it in session. 
+2. There are two main files in views folder - 
+ i) sender.js
+ ii) receiver.js
+ 
+3. You can deploy your own RTC multiconnection node server from this link - https://www.npmjs.com/package/rtcmulticonnection
